@@ -44,7 +44,7 @@ pipeline {
         }
     }
 
-          stage ('dev test') {
+          stage ('master test') {
             when {
               expression{
                 anyOf{
