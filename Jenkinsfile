@@ -44,14 +44,18 @@ pipeline {
         }
     }
 
-          stage ('dev test') {
+          stage ('master test') {
             when {
               expression{
-                !env.BRANCH_NAME.contains("dev/")
+                anyOf{
+                  branch "master"
+                  changerequest()
+                }
+                
               }
             }
             steps{
-              sh 'echo "branch does not contain name dev/"'
+              sh 'echo "branch is master or change request"'
               sh 'ci/component-test.sh'
             }
       }
